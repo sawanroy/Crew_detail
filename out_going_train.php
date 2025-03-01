@@ -52,7 +52,7 @@
 <body>
 <?php
 include "connection.php";
-$sql = "SELECT Sno,Name, Destination, LR, FROM lp_name";
+$sql = "SELECT Name, Destination,status, FROM lp_name";
 $result = $conn->query($sql);
 ?>
     <div class="header">
