@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'], $_POST['u
 
         if ($results) {
         ?>
-    <form action="daily_data.php" method="post">        
+    <form action="Incoming_daily_data.php" method="post">        
     <div class="header">
         <h2>OUT GOING TRAINS</h2>
         <div>Date:<?php echo $date?></div>
@@ -137,14 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'], $_POST['u
                 <th>S. No.</th>
                 <th>DS</th>
                 <th>LP NAME</th>
-                <th>LP REST</th>
                 <th>ALP NAME</th>
-                <th>ALP REST</th>
-                <th>MAIL/EXP DETAIL</th>
                 <th>Train No.</th>
-                <th>Dest.</th>
-                <th>Time</th>
-                <th>I/C</th>
+                <th>Arrival Time</th>
+                <th>Sign Off</th>
             </tr>
             <tr>
             <?php
@@ -170,7 +166,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'], $_POST['u
                              <?php }}?>
 
                     </select></td>
-            <td><input type="text" name="lp_rest[]" id="lp_rest_<?php echo ($row['Sno']) ?>"></td>
             <td><select  name="userSelection_alp[]"  class="userSelection_alp" style="width: 100%">
                         <option value="">-------Select the name-------</option>
                         <option value="DIVERTED">DIVERTED</option>
@@ -182,10 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['userName'], $_POST['u
                              <?php }}?>
 
                     </select></td>
-            <td><input type="text" name="alp_rest[]" id="alp_rest"></td>
-            <td><input type="text" name="train_type[]" id="train_type?>"></td>
             <td><input type="hidden"  name="train_no[]"value="<?php echo htmlspecialchars($row['train_no']); ?>"><?php echo ($row['train_no'])?></td>
-            <td><input type="hidden"  name="destination[]"value="<?php echo htmlspecialchars($row['destination']); ?>"><?php echo ($row['destination'])?></td>
             <td><input type="hidden"  name="time[]"value="<?php echo htmlspecialchars($row['time']); ?>"><?php echo ($row['time'])?></td>
             <td><input type="hidden"  name="remark[]" value="<?php echo htmlspecialchars($row['remark']); ?>"><?php echo ($row['remark'])?></td>
         </tr>
