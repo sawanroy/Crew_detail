@@ -46,8 +46,10 @@ function insertData($data) {
     }
 
     foreach ($data as $row) {
-        $sql = "INSERT INTO lp_name (crew_id, Name, Designation,status)
-        VALUES ('" . $row['A'] . "', '" . $row['B'] . "','" . $row['C'] . "','" . $row['D'] . "')";
+        $sql = "INSERT INTO trains (train_no, day, time, destination, remark)
+        VALUES ('" . $row['A'] . "', '" . $row['B'] . "','" . $row['C'] . "','" . $row['D'] . "','" . $row['E'] . "')";
+        // $sql = "INSERT INTO lp_name (crew_id, Name, Designation,status)
+        // VALUES ('" . $row['A'] . "', '" . $row['B'] . "','" . $row['C'] . "','" . $row['D'] . "')";
 
         if ($conn->query($sql) !== TRUE) {
             echo "Error: " . $sql . "<br>" . $conn->error;

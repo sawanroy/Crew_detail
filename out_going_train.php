@@ -52,9 +52,16 @@
 <body>
 <?php
 include "connection.php";
-$sql = "SELECT Name, Destination,status, FROM lp_name";
-$result = $conn->query($sql);
+// $sql = "SELECT Name, Destination,status, FROM lp_name";
+// $result = $conn->query($sql);
 ?>
+  <h1>Date Picker Form</h1>
+    <form action="daily_detail.php" method="post">
+        <label for="date">Choose a date:</label>
+        <input type="date" id="date" name="date">
+        <button type="submit">Submit</button>
+    </form>
+
     <div class="header">
         <h2>OUT GOING TRAINS</h2>
         <div>Date: 24/02/2025</div>
@@ -64,6 +71,7 @@ $result = $conn->query($sql);
     <table>
         <tr>
             <th>S. No.</th>
+            <th>DS</th>
             <th>LP NAME</th>
             <th>LP REST</th>
             <th>ALP NAME</th>
@@ -75,6 +83,21 @@ $result = $conn->query($sql);
             <th>I/C</th>
         </tr>
         <tr>
+        <?php
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     // Process each field
+//     foreach ($_POST['userSelection'] as $index => $name) {
+//             $designation = $_POST['Des_select'][$index];
+//             $lpName = $name;
+//             $lpRest = $_POST['userData'][$index]; // You will have issues with identical 'name' attributes; consider changing them to arrays
+//             $alpName = $_POST['userSelection_alp'][$index];
+//             $alpRest = $_POST['userData'][$index]; // Same issue as above
+//             $trainNo = $_POST['train_no'][$index];
+//             $destination = $_POST['destination'][$index];
+//             $time = $_POST['time'][$index];
+//             $remark = $_POST['remark'][$index];
+//             // Assume each row has corresponding indices in $_POST arrays
+//         ?>
             <td>1</td>
             <td>John Doe</td>
             <td>10 Hours</td>
@@ -85,6 +108,10 @@ $result = $conn->query($sql);
             <td>City A</td>
             <td>12:00</td>
             <td>Y</td>
+ <?php
+      //  }
+      //  }
+?> 
         </tr>
         <!-- Add more rows as necessary -->
     </table>
@@ -130,5 +157,54 @@ $result = $conn->query($sql);
             </tr>
         </table>
     </div>
+    <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Capture all data from POST
+    $lp_names = $_POST['userSelection'] ?? [];
+    $alp_names = $_POST['userSelection_alp'] ?? [];
+    $lp_rests = $_POST['lp_rest'] ?? [];
+    $alp_rests = $_POST['alp_rest'] ?? [];
+    $train_nos = $_POST['train_no'] ?? [];
+    $destinations = $_POST['destination'] ?? [];
+    $times = $_POST['time'] ?? [];
+    $remarks = $_POST['remark'] ?? [];
+
+    // Start form output
+    echo '<form action="final_processing.php" method="post">';
+    echo '<table>';
+    echo '<tr><th>LP Name</th><th>ALP Name</th><th>Train No.</th><th>Destination</th><th>Time</th><th>Remark</th><th>LP Rest</th><th>ALP Rest</th></tr>';
+
+    // Process each row based on indices
+    foreach ($lp_names as $index => $lp_name) {
+        $alp_name = $alp_names[$index] ?? '';
+        $lp_rest = $lp_rests[$index] ?? '';
+        $alp_rest = $alp_rests[$index] ?? '';
+        $train_no = $train_nos[$index] ?? '';
+        $destination = $destinations[$index] ?? '';
+        $time = $times[$index] ?? '';
+        $remark = $remarks[$index] ?? '';
+
+        // Display the form with the data pre-filled
+        echo '<tr>';
+        echo '<td><input type="text" name="lp_name[]" value="' . htmlspecialchars($lp_name) . '"></td>';
+        echo '<td><input type="text" name="alp_name[]" value="' . htmlspecialchars($alp_name) . '"></td>';
+        echo '<td><input type="text" name="train_no[]" value="' . htmlspecialchars($train_no) . '"></td>';
+        echo '<td><input type="text" name="destination[]" value="' . htmlspecialchars($destination) . '"></td>';
+        echo '<td><input type="text" name="time[]" value="' . htmlspecialchars($time) . '"></td>';
+        echo '<td><input type="text" name="remark[]" value="' . htmlspecialchars($remark) . '"></td>';
+        echo '<td><input type="text" name="lp_rest[]" value="' . htmlspecialchars($lp_rest) . '"></td>';
+        echo '<td><input type="text" name="alp_rest[]" value="' . htmlspecialchars($alp_rest) . '"></td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+    echo '<button type="submit">Submit</button>';
+    echo '</form>';
+}
+?>
+
+
+
+
 </body>
 </html>
