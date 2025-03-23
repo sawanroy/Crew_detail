@@ -92,13 +92,13 @@ include "connection.php";
         <button type="submit">Submit</button>
     </form>
     <h1>4:TOD in</h1>
-    <form action="daily_detail.php" method="post">
+    <form action="tod_duty_in.php" method="post">
         <label for="date">Choose a date:</label>
         <input type="date" id="date" name="date">
         <button type="submit">Submit</button>
     </form>
     <h1>5:TOD out going</h1>
-    <form action="daily_detail.php" method="post">
+    <form action="tod_duty_out.php" method="post">
         <label for="date">Choose a date:</label>
         <input type="date" id="date" name="date">
         <button type="submit">Submit</button>
